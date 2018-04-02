@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RecowebdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="COW_AuthenticateInquiry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_UserId" Type="varchar" Mode="In" />
+          <Parameter Name="p_Password" Type="varchar" Mode="In" />
+          <Parameter Name="p_OutResult" Type="bit" Mode="InOut" />
+          <Parameter Name="p_OutMessage" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="COW_DataStackInquiry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_StackCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="COW_MenuListByJsonInquiry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="PRW_EmployeeInquiry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_PlantId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="PRW_EmployeeSave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_EmployeeId" Type="varchar" Mode="In" />
+          <Parameter Name="p_Password" Type="varchar" Mode="In" />
+          <Parameter Name="p_EmployeeName" Type="nvarchar" Mode="In" />
+          <Parameter Name="p_Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="p_PhoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="p_OutMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="PRW_PlantInquiry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="RecowebdbModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RecowebdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RecowebdbEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="COW_MenuListByJsonInquiry" ReturnType="Collection(RecowebdbModel.COW_MenuListByJsonInquiry_Result)" />
+          <FunctionImport Name="PRW_EmployeeSave">
+            <Parameter Name="p_EmployeeId" Mode="In" Type="String" />
+            <Parameter Name="p_Password" Mode="In" Type="String" />
+            <Parameter Name="p_EmployeeName" Mode="In" Type="String" />
+            <Parameter Name="p_Email" Mode="In" Type="String" />
+            <Parameter Name="p_PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="p_OutMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="COW_DataStackInquiry" ReturnType="Collection(RecowebdbModel.COW_DataStackInquiry_Result)">
+          <Parameter Name="p_StackCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="COW_AuthenticateInquiry">
+            <Parameter Name="p_UserId" Mode="In" Type="String" />
+            <Parameter Name="p_Password" Mode="In" Type="String" />
+            <Parameter Name="p_OutResult" Mode="InOut" Type="Boolean" />
+            <Parameter Name="p_OutMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PRW_EmployeeInquiry" ReturnType="Collection(RecowebdbModel.PRW_EmployeeInquiry_Result)">
+          <Parameter Name="p_PlantId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PRW_PlantInquiry" ReturnType="Collection(RecowebdbModel.PRW_PlantInquiry_Result)" />
+        </EntityContainer>
+        <ComplexType Name="COW_MenuListByJsonInquiry_Result">
+          <Property Type="String" Name="MenuCode" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="ParentMenuCode" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Controller" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ActionMethod" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Icon" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="COW_DataStackInquiry_Result">
+          <Property Type="Int32" Name="StackID" Nullable="false" />
+          <Property Type="String" Name="StackCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="StackName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="LaunchTime" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="GenerateTime" Nullable="true" MaxLength="19" />
+          <Property Type="String" Name="UpdateTime" Nullable="true" MaxLength="19" />
+        </ComplexType>
+        <ComplexType Name="PRW_EmployeeInquiry_Result">
+          <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="Gubun" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="DeptName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="In_Out" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="PositionName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="E_mail" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Production_Section" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PT_Section" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="QC_Section" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MM_Section" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="TL_Section" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="RD_Section" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="IsUse" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="PRW_PlantInquiry_Result">
+          <Property Type="String" Name="PlantId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="PlantName" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="IsUse" Nullable="false" MaxLength="1" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RecowebdbModelStoreContainer" CdmEntityContainer="RecowebdbEntities" >
+          <FunctionImportMapping FunctionImportName="COW_MenuListByJsonInquiry" FunctionName="RecowebdbModel.Store.COW_MenuListByJsonInquiry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecowebdbModel.COW_MenuListByJsonInquiry_Result">
+                <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+                <ScalarProperty Name="ParentMenuCode" ColumnName="ParentMenuCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="ActionMethod" ColumnName="ActionMethod" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PRW_EmployeeSave" FunctionName="RecowebdbModel.Store.PRW_EmployeeSave" />
+          <FunctionImportMapping FunctionImportName="COW_DataStackInquiry" FunctionName="RecowebdbModel.Store.COW_DataStackInquiry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecowebdbModel.COW_DataStackInquiry_Result">
+                <ScalarProperty Name="StackID" ColumnName="StackID" />
+                <ScalarProperty Name="StackCode" ColumnName="StackCode" />
+                <ScalarProperty Name="StackName" ColumnName="StackName" />
+                <ScalarProperty Name="LaunchTime" ColumnName="LaunchTime" />
+                <ScalarProperty Name="GenerateTime" ColumnName="GenerateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="COW_AuthenticateInquiry" FunctionName="RecowebdbModel.Store.COW_AuthenticateInquiry" />
+          <FunctionImportMapping FunctionImportName="PRW_EmployeeInquiry" FunctionName="RecowebdbModel.Store.PRW_EmployeeInquiry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecowebdbModel.PRW_EmployeeInquiry_Result">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Gubun" ColumnName="Gubun" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="In_Out" ColumnName="In/Out" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="Production_Section" ColumnName="Production Section" />
+                <ScalarProperty Name="PT_Section" ColumnName="PT Section" />
+                <ScalarProperty Name="QC_Section" ColumnName="QC Section" />
+                <ScalarProperty Name="MM_Section" ColumnName="MM Section" />
+                <ScalarProperty Name="TL_Section" ColumnName="TL Section" />
+                <ScalarProperty Name="RD_Section" ColumnName="RD Section" />
+                <ScalarProperty Name="IsUse" ColumnName="IsUse" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PRW_PlantInquiry" FunctionName="RecowebdbModel.Store.PRW_PlantInquiry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecowebdbModel.PRW_PlantInquiry_Result">
+                <ScalarProperty Name="PlantId" ColumnName="PlantId" />
+                <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+                <ScalarProperty Name="IsUse" ColumnName="IsUse" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="없음" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
